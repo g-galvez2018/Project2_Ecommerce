@@ -9,6 +9,10 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
+const session = require('express-session');
+
+// import passport docs from config folder
+const passportSetup =  require('./config/passport/passport-setup');
 
 mongoose
   .connect('mongodb://localhost/ecommerceproject', {useNewUrlParser: true})
