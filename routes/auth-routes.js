@@ -7,8 +7,8 @@ const User = require('../models/user-model');
 const bcrypt = require('bcryptjs');
 const bcryptSalt = 10;
 
-router.get('/signup', (req, res, next) => {
-  res.render('auth/signup');
+router.get('/register', (req, res, next) => {
+  res.render('auth/register');
 })
 
 // action="/register"
