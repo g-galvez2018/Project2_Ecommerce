@@ -53,17 +53,30 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
 
+// handle session here:
+// app.js
+app.use(session({
+  secret: "our-passport-local-strategy-app",
+  resave: true,
+  saveUninitialized: true
+}));
+
+// 🎯🎯🎯 MUST come after the session: 🎯🎯🎯
+passportSetup(app);
+
 
 
 //Routes
 const index = require('./routes/index');
 const adminRoutes = require('./routes/admin-route');
 const shopRoutes = require('./routes/shop-route');
+const authroutes = require('./routes/auth-routes.js');
 
 
 app.use('/', index);
 app.use('/admin', adminRoutes);
 app.use('/', shopRoutes);
+app.use('/', authroutes);
 
 
 module.exports = app;

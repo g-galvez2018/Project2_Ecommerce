@@ -6,14 +6,6 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
-router.get('/login', (req, res, next) => {
-  res.render('auth/login');
-});
-
-router.get('/register', (req, res, next) => {
-  res.render('auth/register');
-});
-
 
 
 module.exports = router;

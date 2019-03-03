@@ -5,7 +5,6 @@ const flash = require('connect-flash');
 
 /////// REQUIRE ALL THE STRATEGIES ////////////
 require('./local-strategy');
-
 ///////////////////////////////////////////////
 
 // serializeUser => what to be saved in the session
@@ -24,3 +23,21 @@ passport.deserializeUser((userId, cb) => {
     })
     .catch( err => cb(err));
 })
+
+function passportBasicSetup(blah){
+
+  // passport super power is here:
+  blah.use(passport.initialize()); // <== 'fires' the passport package
+  blah.use(passport.session()); // <== connects passport to the session
+  // to activate flash messages:
+  blah.use(flash());
+  blah.use((req, res, next) => {
+    res.locals.messages = req.flash();
+    if(req.user){
+      res.locals.currentUser = req.user; // <== make currentUser variable available in all hbs whenever we have user in the session
+    }
+    next();
+  })
+}
+
+module.exports = passportBasicSetup;

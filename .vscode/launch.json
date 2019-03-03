@@ -4,10 +4,14 @@
     {
       "type": "node",
       "request": "attach",
-      "name": "DEBUG Irongenerate",
-      "port": 9229,
-      "protocol": "inspector",
-      "restart": "true"
-    }
+      "name": "Attach by Process ID",
+      "processId": "${command:PickProcess}"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/bin/www"
+    }   
   ]
 }

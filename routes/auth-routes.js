@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs');
 const bcryptSalt = 10;
 
 router.get('/register', (req, res, next) => {
+  //res.egister
   res.render('auth/register');
 })
 
@@ -15,7 +16,7 @@ router.get('/register', (req, res, next) => {
 router.post('/register', (req, res, next) => {
   const userEmail = req.body.email;
   const userPassword = req.body.password;
-  const userFullName = req.body.name;
+  const userFullName = req.body.fullName;
 
   if(userEmail == '' || userPassword == '' || userFullName == ''){
     req.flash('error', 'Please fill all the fields.')
@@ -49,7 +50,7 @@ router.post('/register', (req, res, next) => {
               res.redirect('/login');
               return;
             }
-            res.redirect('/private');
+            res.redirect('/product-list');
           })
       })
       .catch( err => next(err)); //closing User.create()
@@ -63,7 +64,7 @@ router.get('/login', (req, res, next) => {
 })
 
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/private', // <== successfully logged in
+  successRedirect: '/product-list', // <== successfully logged in
   failureRedirect: '/login', // <== login failed so go to '/login' to try again
   failureFlash: true,
   passReqToCallback: true
@@ -75,3 +76,5 @@ router.post('/logout', (req, res, next) => {
   req.logout(); // <== .logout() method comes from passport and takes care of the destroying the session for us
   res.redirect('/login');
 })
+
+module.exports = router;
