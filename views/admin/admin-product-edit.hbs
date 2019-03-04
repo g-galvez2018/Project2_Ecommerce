@@ -1,0 +1,45 @@
+<div class="container" style="padding-top:30px">
+
+<div class="col-md-6 mx-auto">  
+  <h1>EDIT PRODUCT</h1>
+     
+        <form class="form" action="/admin/add-product" method="POST" enctype='multipart/form-data'>
+          <div class="form-group">
+            <label for="itemName">Item Name</label>
+            <input type="text" class="form-control" id="itemName" name="itemName">
+          </div>
+
+           <div class="form-group">
+              <label for="category">Category</label>
+              <select class="form-control" id="category" name="category">
+                <option>Mobile</option>
+                <option>Audio</option>
+                <option>Computer</option>
+                <option>Household</option>
+                <option>Kitchen</option>
+              </select>
+           </div>
+
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" name="price">
+          </div>
+         
+
+          <div class="form-group">
+            <label for="imageUrl">Image Url</label>
+            <input type="file" class="form-control" id="imageUrl" name="imageUrl">
+          </div>
+
+          
+          <div class="form-group shadow-textarea">
+          <label for="description">Description</label>
+            <textarea class="form-control z-depth-1" id="description" name="description" rows="6" placeholder="Add product description..........."></textarea>
+          </div>      
+
+          <button type="submit" class="btn btn-primary">Save Product</button>
+        </form>
+    
+ 
+</div>
+</div>
