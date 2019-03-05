@@ -3,10 +3,10 @@
 <div class="col-md-6 mx-auto">  
   <h1>EDIT PRODUCT</h1>
      
-        <form class="form" action="/admin/add-product" method="POST" enctype='multipart/form-data'>
+        <form class="form" action="/admin/admin-product-edit/{{product._id}}/update" method="POST" enctype='multipart/form-data'>
           <div class="form-group">
             <label for="itemName">Item Name</label>
-            <input type="text" class="form-control" id="itemName" name="itemName">
+            <input type="text" class="form-control" id="itemName" name="itemName" value="{{product.itemName}}">
           </div>
 
            <div class="form-group">
@@ -22,19 +22,19 @@
 
           <div class="form-group">
             <label for="price">Price</label>
-            <input type="text" class="form-control" id="price" name="price">
+            <input type="text" class="form-control" id="price" name="price" value="{{product.price}}">
           </div>
          
 
           <div class="form-group">
             <label for="imageUrl">Image Url</label>
-            <input type="file" class="form-control" id="imageUrl" name="imageUrl">
+            <input type="file" class="form-control" id="imageUrl" name="imageUrl" >
           </div>
 
           
           <div class="form-group shadow-textarea">
           <label for="description">Description</label>
-            <textarea class="form-control z-depth-1" id="description" name="description" rows="6" placeholder="Add product description..........."></textarea>
+            <textarea class="form-control z-depth-1" id="description" name="description" rows="6" placeholder="Add product description...........">{{product.description}}</textarea>
           </div>      
 
           <button type="submit" class="btn btn-primary">Save Product</button>

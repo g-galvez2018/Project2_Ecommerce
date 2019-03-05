@@ -1,13 +1,13 @@
 <ul>
   {{#each docs}}
   <li> 
-    <h3> <a href="/product-details/{{this._id}}"> {{ this.itemName }} </a></h3> 
+    <h3> <a href="/admin/admin-product-details/{{this._id}}"> {{ this.itemName }} </a></h3> 
     <img src="{{this.imageUrl}}" alt="" width="300">
     <p>Price: {{this.price}}</p>
     <form action="/admin/admin-product-list/{{this._id}}/delete" method="POST">
         <button type="submit">Delete</button>
     </form> 
-    <a href="/admin/admin-product-details/edit?product_id={{this._id}}" class="edit-button">EDIT</a>  
+    <a href="/admin/admin-product-edit/edit?product_id={{this._id}}" class="edit-button">EDIT</a>  
   </li>
   {{/each}}
 </ul>

@@ -63,7 +63,7 @@ router.get('/admin-product-list', (req, res, next)=>{
     .catch (err => next(err))  
 })
 
-//Delete specific product
+//Route to delete specific product
 router.post('/admin-product-list/:id/delete', (req, res, next)=>{
   Product.findOneAndDelete(req.params.id)
   .then(() => {
@@ -74,16 +74,23 @@ router.post('/admin-product-list/:id/delete', (req, res, next)=>{
 })
 
 //Route with product details to update product
-router.get('/product-details/edit', (req, res, next) => {
-  res.render("admin/admin-product-edit");
+router.get('/admin-product-edit/edit', (req, res, next) => {
+  Product.findOne({_id: req.query.product_id})
+  .then((product) => {
+    console.log(product)
+    res.render("admin/admin-product-edit", {product});
+  })
+  .catch((error) => {
+    console.log(error);
+  })  
 });
 
-// Updated product 
-router.post('/admin-product-list/:productId/update', fileUploader.single('imageUrl'),(req, res, next) => {
-
-  const { name, category, price, description } = req.body;
+//Route used when updating product
+router.post('/admin-product-edit/:product_id/update', fileUploader.single('imageUrl'), (req, res, next) => {
+  console.log(req.body);
+  const { itemName, category, price, description } = req.body;
   const updatedProduct = { // <---------------------------------------
-    name,   
+    itemName,   
     category,
     price,                                                      //  |
     description                                                 //  |
@@ -95,13 +102,28 @@ router.post('/admin-product-list/:productId/update', fileUploader.single('imageU
     updatedProduct.imageUrl = req.file.secure_url;                   //  |
   }                                                               //  |
                                                                   //  |
-  Room.findByIdAndUpdate(req.params.productId, updatedProduct) // <----------
+  Product.findByIdAndUpdate(req.params.product_id, updatedProduct) // <----------
   .then( theUpdatedProduct => {
     // console.log(theUpdatedRoom);
-    res.redirect(`/admin/admin-product-list/${updatedProduct._id}`);
+    //res.redirect(`/admin/admin-product-list/${updatedProduct._id}`);
+    res.redirect('/product-list')
   } )
   .catch( err => next(err) )
+  })
+
+
+//Route to view product details
+router.get('/admin-product-details/:product_id', (req, res, next)=>{
+  //res.render('admin/admin-product-details')
+  Product.findById(req.params.product_id)
+  .then(foundProduct => {
+    res.render('admin/admin-product-details', {product: foundProduct})
+  })
+  .catch( err => next(err) )
 })
+
+
+
 
 
 module.exports = router;
