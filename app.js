@@ -8,8 +8,10 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+//const flash        = require('connect-flash');
 
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 // import passport docs from config folder
 const passportSetup =  require('./config/passport/passport-setup');
@@ -42,11 +44,16 @@ app.use(require('node-sass-middleware')({
   sourceMap: true
 }));
       
-hbs.registerPartials(__dirname + '/views/partials');
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+
+
+
+//Register partials
+hbs.registerPartials(__dirname + '/views/partials');
 
 
 
@@ -58,8 +65,20 @@ app.locals.title = 'Express - Generated with IronGenerator';
 app.use(session({
   secret: "our-passport-local-strategy-app",
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  cookie: {maxAge: 180 * 60 * 1000}
 }));
+
+// Global Variables
+app.use((req,res,next)=>{
+  res.locals.login = req.isAuthenticated;
+  res.locals.session = req.session;
+  next();
+})
+
+//Flash Messages
+//app.use(flash());
 
 // 🎯🎯🎯 MUST come after the session: 🎯🎯🎯
 passportSetup(app);

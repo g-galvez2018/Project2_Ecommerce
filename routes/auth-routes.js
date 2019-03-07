@@ -9,7 +9,7 @@ const bcryptSalt = 10;
 
 router.get('/register', (req, res, next) => {
   //res.egister
-  res.render('auth/register');
+  res.render('user/register');
 })
 
 // action="/register"
@@ -20,7 +20,7 @@ router.post('/register', (req, res, next) => {
 
   if(userEmail == '' || userPassword == '' || userFullName == ''){
     req.flash('error', 'Please fill all the fields.')
-    res.render('auth/signup');
+    res.render('user/signup');
     return;
   }
 
@@ -50,7 +50,7 @@ router.post('/register', (req, res, next) => {
               res.redirect('/login');
               return;
             }
-            res.redirect('/product-list');
+            res.redirect('/shop-home');
           })
       })
       .catch( err => next(err)); //closing User.create()
@@ -60,15 +60,19 @@ router.post('/register', (req, res, next) => {
 
 //////////////// LOGIN /////////////////////
 router.get('/login', (req, res, next) => {
-  res.render('auth/login');
+  res.render('user/login');
 })
 
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/product-list', // <== successfully logged in
+  successRedirect: '/shop-home', // <== successfully logged in
   failureRedirect: '/login', // <== login failed so go to '/login' to try again
   failureFlash: true,
   passReqToCallback: true
 }));
+
+router.get('/profile', (req, res, next) => {
+  res.render('user/profile');
+})
 
 //////////////// LOGOUT /////////////////////
 

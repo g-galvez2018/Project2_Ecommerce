@@ -1,8 +1,27 @@
+const express = require('express');
+const router = express.Router();
 const path = require('path');
 
-const express = require('express');
+const Product = require('../models/product-model');
 
-const router = express.Router();
+const fileUploader = require('../config/upload-setup/cloudinary');
+
+// List all products for shopper
+router.get('/shop-home', (req, res, next) => {
+  console.log("here")
+  Product.find()
+  .then(product => {    
+    res.render('shop/product-list',{ product });
+  })
+  .catch (err => next(err))  
+})
+
+
+
+
+
+
+
 
 router.get('/cart', (req, res, next) => {
   //res.render('shop/cart')
@@ -24,10 +43,7 @@ router.get('/product-details', (req, res, next) => {
   res.send('product details')
 });
 
-router.get('/product-list', (req, res, next) => {
-  //res.render('shop/cart')
-  res.send('product list')
-});
+
 
 module.exports = router;
 

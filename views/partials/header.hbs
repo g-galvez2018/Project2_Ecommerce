@@ -7,22 +7,26 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/shop-home">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+      <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-lock"></i> Admin</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/admin/add-product">Add Product</a>
+              <a class="dropdown-item" href="/admin/admin-product-list">Product List</a>          
+            </div>
       </li>
      
     </ul>
     <ul class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
         <ul class="navbar-nav">
-          <li class="nav-item"> <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i>Shopping Cart</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> Shopping Cart</a> </li>
         
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i>User Management</a>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> User Management</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Login</a>
-              <a class="dropdown-item" href="#">Register</a>          
+              <a class="dropdown-item" href="/login">Login</a>
+              <a class="dropdown-item" href="/register">Register</a>          
             </div>
           </li>
         </ul>
