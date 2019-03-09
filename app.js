@@ -64,8 +64,8 @@ app.locals.title = 'Express - Generated with IronGenerator';
 // app.js
 app.use(session({
   secret: "our-passport-local-strategy-app",
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   cookie: {maxAge: 180 * 60 * 1000}
 }));
