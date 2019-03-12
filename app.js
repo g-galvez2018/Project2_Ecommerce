@@ -93,9 +93,28 @@ const authroutes = require('./routes/auth-routes.js');
 
 
 app.use('/', index);
-app.use('/admin', adminRoutes);
-app.use('/', shopRoutes);
-app.use('/', authroutes);
+app.use('/admin', checkAdmin(), adminRoutes);
+app.use('/shop', shopRoutes);
+app.use('/auth', authroutes);
+
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    res.redirect('/login')
+  }
+}
+
+function checkAdmin() {
+  return function(req, res, next) {
+    if (req.isAuthenticated() && req.user.isAdmin == true) {
+      return next();
+    } else {
+      res.redirect('/auth/login')
+    }
+  }
+}
 
 
 module.exports = app;

@@ -17,6 +17,7 @@ router.post('/register', (req, res, next) => {
   const userEmail = req.body.email;
   const userPassword = req.body.password;
   const userFullName = req.body.fullName;
+  const isAdmin = false;
 
   if(userEmail == '' || userPassword == '' || userFullName == ''){
     req.flash('error', 'Please fill all the fields.')
@@ -29,7 +30,7 @@ router.post('/register', (req, res, next) => {
     if(foundUser !==null){
       req.flash('error', 'Sorry, there is already user with the same email!');
       // here we will redirect to '/login' 
-      res.redirect('/login');
+      res.redirect('/auth/login');
       return;
     }
 
@@ -39,7 +40,8 @@ router.post('/register', (req, res, next) => {
       User.create({
         email: userEmail,
         password: hashPassword,
-        fullName: userFullName
+        fullName: userFullName,
+        isAdmin: isAdmin
       })
       .then(user => {
         // if all good, log in the user automatically
@@ -50,7 +52,7 @@ router.post('/register', (req, res, next) => {
               res.redirect('/login');
               return;
             }
-            res.redirect('/shop-home');
+            res.redirect('/shop/shop-home');
           })
       })
       .catch( err => next(err)); //closing User.create()
@@ -64,8 +66,8 @@ router.get('/login', (req, res, next) => {
 })
 
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/shop-home', // <== successfully logged in
-  failureRedirect: '/login', // <== login failed so go to '/login' to try again
+  successRedirect: '/shop/shop-home', // <== successfully logged in
+  failureRedirect: '/auth/login', // <== login failed so go to '/login' to try again
   failureFlash: true,
   passReqToCallback: true
 }));
@@ -78,7 +80,7 @@ router.get('/profile', (req, res, next) => {
 
 router.post('/logout', (req, res, next) => {
   req.logout(); // <== .logout() method comes from passport and takes care of the destroying the session for us
-  res.redirect('/login');
+  res.redirect('/auth/login');
 })
 
 module.exports = router;

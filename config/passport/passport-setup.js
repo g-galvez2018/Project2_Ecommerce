@@ -1,4 +1,4 @@
-const passport =require('passport');
+const passport = require('passport');
 const User = require('../../models/user-model');
 // require connect-flash for flash messages
 const flash = require('connect-flash');
@@ -24,14 +24,14 @@ passport.deserializeUser((userId, cb) => {
     .catch( err => cb(err));
 })
 
-function passportBasicSetup(blah){
+function passportBasicSetup(pass){
 
   // passport super power is here:
-  blah.use(passport.initialize()); // <== 'fires' the passport package
-  blah.use(passport.session()); // <== connects passport to the session
+  pass.use(passport.initialize()); // <== 'fires' the passport package
+  pass.use(passport.session()); // <== connects passport to the session
   // to activate flash messages:
-  blah.use(flash());
-  blah.use((req, res, next) => {
+  pass.use(flash());
+  pass.use((req, res, next) => {
     res.locals.messages = req.flash();
     if(req.user){
       res.locals.currentUser = req.user; // <== make currentUser variable available in all hbs whenever we have user in the session

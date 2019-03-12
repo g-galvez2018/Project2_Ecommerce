@@ -6,24 +6,16 @@ const Product = require('../models/product-model');
 
 const fileUploader = require('../config/upload-setup/cloudinary');
 
-
-
-
-
-
-//Get route to display form to add product
+// Get route to display form to add product
 router.get('/add-product', (req, res, next) => {
   res.render('admin/add-product');
 });
 
-//Post route to create product
+// Post route to create products
 router.post('/add-product', fileUploader.single('imageUrl'),(req, res, next) => {
-   console.log('body: ', req.body);
-   console.log(' - - -- - -- - -- - - -- - - ');
-   console.log('file: ', req.file);
   const { itemName, category, price, description } = req.body;
   Product.create({
-    itemName,
+    itemName, 
     category,
     price,
     description,
@@ -36,7 +28,7 @@ router.post('/add-product', fileUploader.single('imageUrl'),(req, res, next) => 
   .catch( err => next(err) )
 })
 
-//Get route to display all products
+//Get route to display all products for admin
 router.get('/admin-product-list', (req, res, next)=>{
   Product.find()
     .then(docs => {
@@ -53,7 +45,6 @@ router.post('/admin-product-list/:id/delete', (req, res, next)=>{
     res.redirect('/admin/admin-product-list');
   })
   .catch(err => next(err));
-  
 })
 
 //Route with product details to update product
@@ -68,9 +59,9 @@ router.get('/admin-product-edit/edit', (req, res, next) => {
   })  
 });
 
-//Route used when updating product
+//Post Route used when updating product
 router.post('/admin-product-edit/:product_id/update', fileUploader.single('imageUrl'), (req, res, next) => {
-  console.log(req.body);
+  
   const { itemName, category, price, description } = req.body;
   const updatedProduct = { // <---------------------------------------
     itemName,   
@@ -89,7 +80,7 @@ router.post('/admin-product-edit/:product_id/update', fileUploader.single('image
   .then( theUpdatedProduct => {
     // console.log(theUpdatedRoom);
     //res.redirect(`/admin/admin-product-list/${updatedProduct._id}`);
-    res.redirect('/product-list')
+    res.redirect('/admin/admin-product-list')
   } )
   .catch( err => next(err) )
   })
@@ -104,9 +95,6 @@ router.get('/admin-product-details/:product_id', (req, res, next)=>{
   })
   .catch( err => next(err) )
 })
-
-
-
 
 
 module.exports = router;
