@@ -7,24 +7,27 @@ const User = require('../models/user-model');
 const bcrypt = require('bcryptjs');
 const bcryptSalt = 10;
 
+
+// Route to display register form
 router.get('/register', (req, res, next) => {
-  //res.egister
-  res.render('user/register');
+   res.render('user/register');
 })
 
-// action="/register"
+// Route to handle creation of new user account
 router.post('/register', (req, res, next) => {
   const userEmail = req.body.email;
   const userPassword = req.body.password;
   const userFullName = req.body.fullName;
   const isAdmin = false;
 
+// Check for empty fields and display error message
   if(userEmail == '' || userPassword == '' || userFullName == ''){
     req.flash('error', 'Please fill all the fields.')
-    res.render('user/signup');
+    res.render('user/register');
     return;
   }
 
+// Check if user's email address already exists in database and return error if user already exists
   User.findOne({ email: userEmail })
   .then(foundUser => {
     if(foundUser !==null){
@@ -34,6 +37,7 @@ router.post('/register', (req, res, next) => {
       return;
     }
 
+// If user does not exist in database - create new user
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPassword = bcrypt.hashSync(userPassword, salt);
 
@@ -49,7 +53,7 @@ router.post('/register', (req, res, next) => {
             if(err){
               // req.flash.error = 'some message here'
               req.flash('error', 'Auto login does not work so please log in manually ✌🏻');
-              res.redirect('/login');
+              res.redirect('/auth/login');
               return;
             }
             res.redirect('/shop/shop-home');
@@ -60,11 +64,12 @@ router.post('/register', (req, res, next) => {
   .catch( err => next(err)); // closing User.findOne();
 })
 
-//////////////// LOGIN /////////////////////
+// Route to display login form
 router.get('/login', (req, res, next) => {
   res.render('user/login');
 })
 
+//Route to handle login information
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/shop/shop-home', // <== successfully logged in
   failureRedirect: '/auth/login', // <== login failed so go to '/login' to try again
@@ -72,12 +77,12 @@ router.post('/login', passport.authenticate('local', {
   passReqToCallback: true
 }));
 
+// Route to display user profile and orders
 router.get('/profile', (req, res, next) => {
   res.render('user/profile');
 })
 
-//////////////// LOGOUT /////////////////////
-
+// Route to process logout process
 router.post('/logout', (req, res, next) => {
   req.logout(); // <== .logout() method comes from passport and takes care of the destroying the session for us
   res.redirect('/auth/login');

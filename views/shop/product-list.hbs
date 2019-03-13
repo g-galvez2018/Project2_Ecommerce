@@ -8,16 +8,15 @@
 <div class="row match-height">
   {{# each product }}
 		<div class="col-xl-4 col-md-6 col-sm-12">
-			<div class="card" style="height: 310px;">
-				<div class="card-content">
-					<img class="img-fluid mx-auto d-block" src="{{this.imageUrl}}" alt="Card image cap">
+			<div class="card-content">
+				<div class="card">
+					<img class="img-fluid mx-auto d-block " src="{{this.imageUrl}}"  alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-text"><a href="/admin/admin-product-details/{{this._id}}"> {{ this.itemName }} </a></h5>
 						<div class="clearfix">				
-              <div class="price float-left">{{ this.price }}</div>
-              <a href="/shop/add-to-cart/{{this._id}}" class="btn btn-success float-right"> <i class="fas fa-cart-plus"></i> Add to cart</a>
-            </div>	
-            </form>            
+                            <div class="price float-left">{{ this.price }}</div>
+                            <a href="/shop/add-to-cart/{{this._id}}" class="btn btn-success float-right"> <i class="fas fa-cart-plus"></i> Add to cart</a>
+                        </div>                      
 					</div>
 				</div>
 			</div>

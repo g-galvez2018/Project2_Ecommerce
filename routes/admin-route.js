@@ -6,7 +6,7 @@ const Product = require('../models/product-model');
 
 const fileUploader = require('../config/upload-setup/cloudinary');
 
-// Get route to display form to add product
+// Route to display form to add product
 router.get('/add-product', (req, res, next) => {
   res.render('admin/add-product');
 });
@@ -28,7 +28,7 @@ router.post('/add-product', fileUploader.single('imageUrl'),(req, res, next) => 
   .catch( err => next(err) )
 })
 
-//Get route to display all products for admin
+// Route to display all products for admin
 router.get('/admin-product-list', (req, res, next)=>{
   Product.find()
     .then(docs => {
@@ -38,7 +38,7 @@ router.get('/admin-product-list', (req, res, next)=>{
     .catch (err => next(err))  
 })
 
-//Route to delete specific product
+// Route to delete specific product
 router.post('/admin-product-list/:id/delete', (req, res, next)=>{
   Product.findOneAndDelete(req.params.id)
   .then(() => {
@@ -47,7 +47,7 @@ router.post('/admin-product-list/:id/delete', (req, res, next)=>{
   .catch(err => next(err));
 })
 
-//Route with product details to update product
+// Route with product details to update product
 router.get('/admin-product-edit/edit', (req, res, next) => {
   Product.findOne({_id: req.query.product_id})
   .then((product) => {
@@ -59,7 +59,7 @@ router.get('/admin-product-edit/edit', (req, res, next) => {
   })  
 });
 
-//Post Route used when updating product
+// Post Route used when updating product
 router.post('/admin-product-edit/:product_id/update', fileUploader.single('imageUrl'), (req, res, next) => {
   
   const { itemName, category, price, description } = req.body;
@@ -86,7 +86,7 @@ router.post('/admin-product-edit/:product_id/update', fileUploader.single('image
   })
 
 
-//Route to view product details
+// Route to view product details
 router.get('/admin-product-details/:product_id', (req, res, next)=>{
   //res.render('admin/admin-product-details')
   Product.findById(req.params.product_id)

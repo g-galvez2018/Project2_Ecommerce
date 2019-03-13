@@ -1,12 +1,12 @@
 <div class="row match-height">
   {{# each docs }}
-		<div class="col-xl-4 col-md-6 col-sm-12">
-			<div class="card" style="height: 400px;">
-				<div class="card-content">
+		<div class="col-xl-4 col-md-6 col-sm-12">			
+			<div class="card-content">
+				<div class="card">
 					<img class="img-fluid mx-auto d-block" src="{{this.imageUrl}}" alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-text"><a href="/admin/admin-product-details/{{this._id}}"> {{ this.itemName }} </a></h5>
-						<p class="card-text">{{ this.price }}</p>					
+						<p class="card-text">${{ this.price }}.00</p>					
             <form action="/admin/admin-product-list/{{this._id}}/delete" method="POST">
               <button class="btn btn-secondary float-right" type="submit">Delete</button>
               <button class="btn btn-secondary float-right"><a href="/admin/admin-product-edit/edit?product_id={{this._id}}">Edit</a></button>
@@ -15,6 +15,6 @@
 				</div>
 			</div>
 		</div>	
-    {{/each}}
+  {{/each}}
 </div>
 

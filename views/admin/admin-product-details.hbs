@@ -1,7 +1,15 @@
-<h1>Welcome to the details page of the: {{ product.itemName }}</h1>
-<hr>
-<h3>Description:</h3>
-<p> {{ product.description }}</p>
-<hr>
-<h3>Gallery:</h3>
-<img src="{{product.imageUrl}}" alt="" width="300">
+
+
+
+<div class="row mt-4">
+    <div class="col-6 mx-auto">
+        <img class="img-fluid" src="{{product.imageUrl}}">
+    </div>
+
+    <div class="col-6 mx-auto">
+        <h3 style="font-size:4vw;">{{product.itemName}}</h3>
+        <p style="font-size:2vw;"> {{ product.description }}</p>
+        <p>{{ product.price }}</p>
+    </div>
+</div>
+
