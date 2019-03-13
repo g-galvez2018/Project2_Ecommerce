@@ -19,9 +19,12 @@ router.get('/shop-home', (req, res, next) => {
 })
 
 // Route for product details
-router.get('/product-details', (req, res, next) => {
-  //res.render('shop/cart')
-  res.send('product details')
+router.get('/product-details/:product_id', (req, res, next) => {
+  Product.findById(req.params.product_id)
+  .then(foundProduct => {
+    res.render('shop/product-details', {product: foundProduct})
+  })
+  .catch( err => next(err) )
 });
 
 //Route to handle adding items to Shopping Cart
@@ -45,7 +48,7 @@ router.get('/shopping-cart', function(req, res, next) {
       return res.render('shop/shopping-cart', {products: null});
   } 
    var cart = new Cart(req.session.cart);
-   res.render('shop/shopping-cart-2', {products: cart.generateArray(), totalPrice: cart.totalPrice});
+   res.render('shop/shopping-cart', {products: cart.generateArray(), totalPrice: cart.totalPrice});
 });
 
 // Route to handle reducing shopping cart by one item
@@ -70,7 +73,7 @@ router.get('/add/:id', (req, res, next) => {
 
 
 // Route to checkout items
-router.get('/checkout', (req, res, next) => {
+router.get('/checkout', isLoggedIn, (req, res, next) => {
   if (!req.session.cart) {
     return res.redirect('/shopping-cart');
   }
@@ -80,7 +83,8 @@ router.get('/checkout', (req, res, next) => {
   res.render('shop/checkout')
 });
 
-router.post('/checkout' , (req, res, next)=>{
+// Route to handle checkout
+router.post('/checkout' , isLoggedIn, function (req, res, next){
   if (!req.session.cart){
     return res.redirect('/shop/shopping-cart');
   }
@@ -113,6 +117,6 @@ function isLoggedIn(req, res, next) {
       return next();
   }
   req.session.oldUrl = req.url;
-  res.redirect('/user/signin');
+  res.redirect('/auth/login');
 }
 

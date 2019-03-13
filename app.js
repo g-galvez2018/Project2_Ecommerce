@@ -8,7 +8,7 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
-//const flash        = require('connect-flash');
+const flash        = require('connect-flash');
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -69,6 +69,9 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   cookie: {maxAge: 180 * 60 * 1000}
 }));
+
+// Flash Messages
+app.use(flash());
 
 // Global Variables
 app.use((req,res,next)=>{

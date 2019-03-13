@@ -12,7 +12,10 @@
                 {{# each products }}
                     <div class="row shopping-cart-items">
                       <div class="col-5" style="color: red">{{ this.item.itemName }}</div>                      
-                      <div class="col-4"> <i class="fas fa-minus-circle"></i> {{ this.qty }} <i class="fas fa-plus-circle"></i></></></div>                      
+                      <div class="col-4"> 
+                            <a href="/shop/reduce/{{this.item._id}}"><i class="fas fa-minus-circle"></i></a> {{ this.qty }} 
+                            <a href="/shop/add/{{this.item._id}}"><i class="fas fa-plus-circle"></i></a>
+                      </div>                      
                       <div class="col-2">${{ this.price }}</div>
                     </div>
                     <hr>
