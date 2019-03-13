@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon -e 'js|handlebars|hbs|html' ./bin/www",
-    "dev": "DEBUG=ecommerceproject:* nodemon -e 'js|handlebars|hbs|html'./bin/www",
+    "start": "nodemon ./bin/www",
+    "dev": "DEBUG=ecommerceproject:* nodemon ./bin/www",
     "dev-windows": "nodemon ./bin/www"
   },
   "dependencies": {

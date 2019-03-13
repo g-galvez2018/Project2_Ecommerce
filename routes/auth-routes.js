@@ -3,9 +3,13 @@ const router = express.Router();
 
 const passport = require('passport');
 const User = require('../models/user-model');
+const Cart = require('../models/cart')
+const Order = require('../models/order-model')
 
 const bcrypt = require('bcryptjs');
 const bcryptSalt = 10;
+
+
 
 
 // Route to display register form
@@ -77,10 +81,7 @@ router.post('/login', passport.authenticate('local', {
   passReqToCallback: true
 }));
 
-// Route to display user profile and orders
-router.get('/profile', (req, res, next) => {
-  res.render('user/profile');
-})
+
 
 // Route to process logout process
 router.post('/logout', (req, res, next) => {
@@ -88,4 +89,28 @@ router.post('/logout', (req, res, next) => {
   res.redirect('/auth/login');
 })
 
+// Route to view profile - orders made by logged in user
+
+router.get('/profile', isLoggedIn, function (req, res, next) {
+  Order.find({user: req.user}, function(err, orders) {
+      if (err) {
+          return res.write('Error!');
+      }
+      var cart;
+      orders.forEach(function(order) {
+          cart = new Cart(order.cart);
+          order.items = cart.generateArray();
+      });
+      res.render('user/profile', { orders: orders });
+  });
+});
+
 module.exports = router;
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+      return next();
+  }
+  req.session.oldUrl = req.url;
+  res.redirect('/auth/login');
+}
