@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <h1>User Profile</h1>
+        <h3>Hi {{currentUser.fullName}}!!</h3>
         <hr>
-        <h2>My Orders</h2>
+        <h4>My Orders</h4>
         {{# each orders }}
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -10,13 +10,13 @@
                         {{# each this.items }}
                             <li class="list-group-item">                                
                                 {{ this.item.itemName }} | {{ this.qty }} Units
-                                <span class="badge">{{ this.price }}</span>
+                                <span class="badge">{{ formatNumber this.price style="currency" currency="USD" }}</span>
                             </li>
                         {{/each}}
                     </ul>
                 </div>
                 <div class="panel-footer">
-                    <strong>Total Price: ${{ this.cart.totalPrice }}</strong>
+                    <strong>Total Price: {{ formatNumber this.cart.totalPrice style="currency" currency="USD" }}</strong>
                 </div>
             </div>
         {{/each}}

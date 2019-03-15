@@ -6,10 +6,10 @@
 					<img class="img-fluid mx-auto d-block" src="{{this.imageUrl}}" alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-text"><a href="/admin/admin-product-details/{{this._id}}"> {{ this.itemName }} </a></h5>
-						<p class="card-text">${{ this.price }}.00</p>					
+						<p class="card-text">{{ formatNumber this.price style="currency" currency="USD" }}</p>					
             <form action="/admin/admin-product-list/{{this._id}}/delete" method="POST">
-              <button class="btn btn-secondary float-right" type="submit">Delete</button>
-              <button class="btn btn-secondary float-right"><a href="/admin/admin-product-edit/edit?product_id={{this._id}}">Edit</a></button>
+              <button class="btn btn-outline-dark float-right" type="submit">Delete</button>
+              <button class="btn btn-outline-dark float-right"><a class="btn-outline-dark" href="/admin/admin-product-edit/edit?product_id={{this._id}}">Edit</a></button>
             </form>            
 					</div>
 				</div>

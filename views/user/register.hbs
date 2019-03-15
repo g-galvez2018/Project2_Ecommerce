@@ -7,12 +7,12 @@
       <div class="card-body">
         <form class="form" action="/auth/register" method="POST">
           <div class="form-group">
-            <label for="Name">Your name</label>
+            <label for="Name">Full Name</label>
             <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your name">            
           </div>
 
           <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">Email Address</label>
             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
@@ -22,7 +22,7 @@
             <input type="password" class="form-control" id="password" name="password"placeholder="Password">
           </div>
          
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-secondary btn-lg btn-block">Create an Account</button>
         </form>
         {{> flashMessage}}
     </div>

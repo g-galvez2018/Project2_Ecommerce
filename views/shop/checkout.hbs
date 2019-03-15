@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-4 offset-sm-4">
         <h1>Checkout</h1>
-        <h4>Your Total: ${{total}}</h4>
+        <h4>Your Total:{{formatNumber total style="currency" currency="USD"}}</h4>
        <!-- <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
             {{errMsg}}
         </div>-->
@@ -55,7 +55,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">Buy now</button>
+            <button type="submit" class="btn btn-secondary btn-lg btn-block">Buy now</button>
         </form>
     </div>
 </div>

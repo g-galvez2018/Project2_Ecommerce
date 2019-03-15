@@ -58,4 +58,18 @@ button {
   background-repeat: no-repeat;
   background-size: cover; }
 
+.footer-links {
+  color: #636262;
+  text-decoration: none; }
+
+div > p > a, a:hover, a:visited, a:focus {
+  color: #636262;
+  text-decoration: none; }
+
+div > h5 > a, a:visited, a:focus {
+  color: #636262; }
+
+div > h5 > a:hover {
+  color: #e95a5a; }
+
 /*# sourceMappingURL=style.css.map */
