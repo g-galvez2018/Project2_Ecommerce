@@ -18,6 +18,17 @@ router.get('/shop-home', (req, res, next) => {
   .catch (err => next(err))  
 })
 
+// Route to display cameras
+router.get('/shop-home/:category', (req, res, next) => {  
+  console.log(req.params.category)
+  Product.find({'category':req.params.category})
+  .then(product => {    
+    res.render('shop/product-list',{ product });
+  })
+  .catch (err => next(err))  
+})
+
+
 // Route for product details
 router.get('/product-details/:product_id', (req, res, next) => {
   Product.findById(req.params.product_id)

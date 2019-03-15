@@ -84,8 +84,9 @@ router.post('/login', passport.authenticate('local', {
 
 
 // Route to process logout process
-router.post('/logout', (req, res, next) => {
+router.get('/logout', (req, res, next) => {
   req.logout(); // <== .logout() method comes from passport and takes care of the destroying the session for us
+  req.session.cart = null; //=> Empty shopping for user that logged out
   res.redirect('/auth/login');
 })
 

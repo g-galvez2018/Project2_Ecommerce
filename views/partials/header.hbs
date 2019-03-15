@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
   <a class="navbar-brand" href="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -6,16 +6,34 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/shop/shop-home">Home</a>
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/shop-home">All Products</a>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/shop-home/Cameras">Cameras</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/shop-home/Mobile">Cell Phones</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/shop-home/Computer">Computers</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/shop/shop-home/Headphones">Headphones</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/shop/shop-home/TVs">TVs</a>
+      </li>
+
+      {{#if currentUser.isAdmin}}
+        <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-lock"></i> Admin</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/admin/add-product">Add Product</a>
               <a class="dropdown-item" href="/admin/admin-product-list">Product List</a>          
             </div>
-      </li>
+        </li>
+      {{/if}}
      
     </ul>
     <ul class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
@@ -30,8 +48,13 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> Account</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/auth/login">Login</a>
-              <a class="dropdown-item" href="/auth/register">Register</a>          
+              {{#if currentUser }}
+                <a class="dropdown-item" href="/auth/profile">User Account</a>
+                <a class="dropdown-item" href="/auth/logout">Logout</a>
+              {{ else }} 
+                <a class="dropdown-item" href="/auth/register">Register</a>
+                <a class="dropdown-item" href="/auth/login">Sign in</a>   
+              {{/if}}      
             </div>
           </li>
         </ul>

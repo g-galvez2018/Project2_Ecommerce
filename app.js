@@ -77,6 +77,7 @@ app.use(flash());
 app.use((req,res,next)=>{
   res.locals.login = req.isAuthenticated;
   res.locals.session = req.session;
+  //res.locals.admin = checkAdminUser();
   next();
 })
 
@@ -118,6 +119,16 @@ function checkAdmin() {
     }
   }
 }
+
+/*function checkAdminUser() {
+  return function(req, res, next) {
+    if (req.isAuthenticated() && req.user.isAdmin == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}*/
 
 
 module.exports = app;
