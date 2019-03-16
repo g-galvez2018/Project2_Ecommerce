@@ -91,7 +91,6 @@ router.get('/checkout', isLoggedIn, (req, res, next) => {
   var cart = new Cart(req.session.cart);
   var errMsg = req.flash('error')[0];
   res.render('shop/checkout', {total: cart.totalPrice});
-  res.render('shop/checkout')
 });
 
 // Route to handle checkout
