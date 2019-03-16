@@ -4,21 +4,22 @@
         <hr>
         <h4>My Orders</h4>
         {{# each orders }}
-            <div class="panel panel-default">
+            <div class="panel panel-default mt-5">
                 <div class="panel-body">
                     <ul class="list-group">
                         {{# each this.items }}
                             <li class="list-group-item">                                
-                                {{ this.item.itemName }} | {{ this.qty }} Units
-                                <span class="badge">{{ formatNumber this.price style="currency" currency="USD" }}</span>
+                                {{ this.item.itemName }}    |    {{ this.qty }} Units
+                                <span class="badge" style="font-weight: bold; font-size:14px; margin-left:15px;">{{ formatNumber this.price style="currency" currency="USD" }}</span>
                             </li>
                         {{/each}}
                     </ul>
                 </div>
-                <div class="panel-footer">
-                    <strong>Total Price: {{ formatNumber this.cart.totalPrice style="currency" currency="USD" }}</strong>
+                <div class="panel-footer mt-2">
+                    <strong style="font-size: 16px;">Total Price: {{ formatNumber this.cart.totalPrice style="currency" currency="USD" }}</strong>
                 </div>
             </div>
         {{/each}}
     </div>
 </div>
+
