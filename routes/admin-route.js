@@ -66,19 +66,18 @@ router.post('/admin-product-edit/:product_id/update', fileUploader.single('image
   const updatedProduct = { // <---------------------------------------
     itemName,   
     category,
-    price,                                                      //  |
-    description                                                 //  |
-  }                                                              //  |
-  // if the user changed the picture, 'req.file' will exist       //  |
-  // and then we create additional property updatedProduct.imageUrl  //  |
-  // inside 'updatedProduct' object                                  //  |                 
-  if(req.file){                                                   //  |
-    updatedProduct.imageUrl = req.file.secure_url;                   //  |
-  }                                                               //  |
-                                                                  //  |
+    price,                                                      
+    description                                                 
+  }                                                              
+  // if the user changed the picture, 'req.file' will exist       
+  // and then we create additional property updatedProduct.imageUrl 
+  // inside 'updatedProduct' object                                              
+  if(req.file){                                                   
+    updatedProduct.imageUrl = req.file.secure_url;                  
+  }                                                               
   Product.findByIdAndUpdate(req.params.product_id, updatedProduct) // <----------
   .then( theUpdatedProduct => {
-    // console.log(theUpdatedRoom);
+    
     //res.redirect(`/admin/admin-product-list/${updatedProduct._id}`);
     res.redirect('/admin/admin-product-list')
   } )
@@ -88,7 +87,7 @@ router.post('/admin-product-edit/:product_id/update', fileUploader.single('image
 
 // Route to view product details
 router.get('/admin-product-details/:product_id', (req, res, next)=>{
-  //res.render('admin/admin-product-details')
+  
   Product.findById(req.params.product_id)
   .then(foundProduct => {
     res.render('admin/admin-product-details', {product: foundProduct})
