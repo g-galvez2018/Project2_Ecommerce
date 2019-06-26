@@ -17,7 +17,7 @@ router.get('/register', (req, res, next) => {
    res.render('user/register');
 })
 
-// Route to handle creation of new user account
+// Route to handle creation for new user account
 router.post('/register', (req, res, next) => {
   const userEmail = req.body.email;
   const userPassword = req.body.password;
