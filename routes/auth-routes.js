@@ -108,6 +108,8 @@ router.get('/profile', isLoggedIn, function (req, res, next) {
 
 module.exports = router;
 
+//Function to check if user is logged in
+
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
       return next();
